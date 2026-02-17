@@ -18,7 +18,7 @@
                 ref="sliderContainer"
             >
                 <div
-                    class="max-h-screen w-screen bg-cover bg-no-repeat"
+                    class="max-h-screen w-screen bg-cover bg-no-repeat relative group"
                     v-for="(image, index) in images"
                     :key="index"
                     @click="visitLink(image)"
@@ -40,6 +40,15 @@
                         ::fetchpriority="index === 0 ? 'high' : 'low'"
                         ::decoding="index === 0 ? 'sync' : 'async'"
                     />
+
+                    <!-- Slider Caption -->
+                    <div 
+                        v-if="image.title"
+                        class="absolute bottom-12 left-12 p-6 bg-[#1a5490]/90 text-white max-w-[450px] rounded-sm transform transition-all duration-500 hover:scale-105 max-md:bottom-8 max-md:left-8 max-sm:bottom-6 max-sm:left-6 max-sm:p-4"
+                    >
+                        <h2 class="text-3xl font-bold mb-2 uppercase tracking-wider max-md:text-xl max-sm:text-lg">@{{ image.title }}</h2>
+                        <div class="h-1 w-12 bg-white rounded-full"></div>
+                    </div>
                 </div>
             </div>
 

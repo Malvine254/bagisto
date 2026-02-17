@@ -41,7 +41,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
 
                 <!-- Product Badge -->
-                <div class="absolute top-5 left-5 z-20">
+                <div class="absolute top-5 left-5 z-[5]">
                     <p
                         class="rounded-2xl bg-[#1a5490] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white shadow-xl"
                         v-if="product.is_new"

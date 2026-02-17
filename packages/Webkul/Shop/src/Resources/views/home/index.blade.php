@@ -74,6 +74,13 @@
                 />
 
                 @break
+
+            @case ($customization::SERVICES_CONTENT)
+                <!-- Services Content -->
+                <x-shop::layouts.services />
+
+                @break
+
             @case ($customization::PRODUCT_CAROUSEL)
                 <!-- Product Carousel -->
                 <x-shop::products.carousel

@@ -15,25 +15,16 @@
             class="container mt-20 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
             v-if="! isLoading && products.length"
         >
-            <div class="flex items-end justify-between mb-8">
-                <h2 class="font-dmserif text-5xl font-bold tracking-tight text-slate-900 border-l-8 border-[#1a5490] pl-6 max-md:text-3xl max-sm:text-2xl">
-                    @{{ title }}
-                </h2>
+            <div class="flex flex-col gap-2 border-b border-slate-200 pb-6 mb-10">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold text-slate-900 tracking-tight max-md:text-xl">
+                        @{{ title }}
+                    </h2>
 
-                <div class="flex items-center justify-between gap-8">
-                    <a
-                        :href="navigationLink"
-                        class="hidden group/viewall items-center gap-2 rounded-xl bg-slate-50 px-6 py-3 text-sm font-bold uppercase tracking-widest text-[#1a5490] transition-all hover:bg-[#1a5490] hover:text-white max-lg:flex"
-                        v-if="navigationLink"
-                    >
-                        @lang('shop::app.components.products.carousel.view-all')
-                        <span class="icon-arrow-right text-2xl transition-transform group-hover/viewall:translate-x-1"></span>
-                    </a>
-
-                    <template v-if="products.length > 3">
+                    <div class="flex items-center justify-between gap-8 max-lg:hidden">
                         <span
                             v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
-                            class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
+                            class="icon-arrow-left-stylish flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-2xl text-slate-600 transition-all hover:border-[#1a5490] hover:bg-[#1a5490] hover:text-white active:scale-95"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.previous')"
                             tabindex="0"
@@ -43,15 +34,16 @@
 
                         <span
                             v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
-                            class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
+                            class="icon-arrow-right-stylish flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-2xl text-slate-600 transition-all hover:border-[#1a5490] hover:bg-[#1a5490] hover:text-white active:scale-95"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.next')"
                             tabindex="0"
                             @click="swipeRight"
                         >
                         </span>
-                    </template>
+                    </div>
                 </div>
+                <div class="h-1 w-10 bg-[#1a5490] rounded-full"></div>
             </div>
 
             <div

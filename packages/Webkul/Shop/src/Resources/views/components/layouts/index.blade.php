@@ -133,7 +133,7 @@
 
 
             <!-- Page Services Blade Component -->
-            @if ($hasFeature)
+            @if ($hasFeature && request()->route()->getName() !== 'shop.home.index')
                 <x-shop::layouts.services />
             @endif
 
