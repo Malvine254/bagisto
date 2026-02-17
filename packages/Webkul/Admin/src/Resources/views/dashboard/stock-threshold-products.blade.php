@@ -49,9 +49,11 @@
 
                             <div class="flex flex-col gap-1.5">
                                 <!-- Product Name -->
-                                <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                    @{{ product.name }}
-                                </p>
+                                <a :href="'{{ route('admin.catalog.products.edit', ':replace') }}'.replace(':replace', product.id)">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white hover:text-blue-600 transition-colors">
+                                        @{{ product.name }}
+                                    </p>
+                                </a>
 
                                 <!-- Product SKU -->
                                 <p class="text-gray-600 dark:text-gray-300">

@@ -43,7 +43,11 @@ export default defineConfig(({ mode }) => {
                     "src/Resources/assets/css/app.css",
                     "src/Resources/assets/js/app.js",
                 ],
-                refresh: true,
+                refresh: [
+                    "src/Resources/assets/css/app.css",
+                    "src/Resources/assets/js/app.js",
+                    "src/Resources/views/**/*.blade.php",
+                ],
                 preload: false,
             }),
         ],

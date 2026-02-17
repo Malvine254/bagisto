@@ -29,7 +29,7 @@
                     >
                         <a
                             :href="category.slug"
-                            class="h-[110px] w-[110px] rounded-full bg-zinc-100 max-md:h-20 max-md:w-20 max-sm:h-[60px] max-sm:w-[60px]"
+                            class="group/cat h-[110px] w-[110px] overflow-hidden rounded-full bg-slate-50 ring-0 ring-[#1a5490] transition-all duration-300 hover:ring-4 hover:ring-offset-2 max-md:h-20 max-md:w-20 max-sm:h-[60px] max-sm:w-[60px]"
                             :aria-label="category.name"
                         >
                             <x-shop::media.images.lazy
@@ -49,10 +49,10 @@
 
                         <a
                             :href="category.slug"
-                            class=""
+                            class="group/cat-name"
                         >
                             <p
-                                class="text-center text-lg text-black max-md:text-base max-md:font-normal max-sm:text-sm"
+                                class="text-center text-lg font-bold text-slate-700 transition-colors group-hover/cat-name:text-[#1a5490] max-md:text-base max-md:font-normal max-sm:text-sm"
                                 v-text="category.name"
                             >
                             </p>

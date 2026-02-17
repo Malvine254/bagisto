@@ -15,22 +15,19 @@
             class="container mt-20 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
             v-if="! isLoading && products.length"
         >
-            <div class="flex justify-between">
-                <h2 class="font-dmserif text-3xl max-md:text-2xl max-sm:text-xl">
+            <div class="flex items-end justify-between mb-8">
+                <h2 class="font-dmserif text-5xl font-bold tracking-tight text-slate-900 border-l-8 border-[#1a5490] pl-6 max-md:text-3xl max-sm:text-2xl">
                     @{{ title }}
                 </h2>
 
                 <div class="flex items-center justify-between gap-8">
                     <a
                         :href="navigationLink"
-                        class="hidden max-lg:flex"
+                        class="hidden group/viewall items-center gap-2 rounded-xl bg-slate-50 px-6 py-3 text-sm font-bold uppercase tracking-widest text-[#1a5490] transition-all hover:bg-[#1a5490] hover:text-white max-lg:flex"
                         v-if="navigationLink"
                     >
-                        <p class="items-center text-xl max-md:text-base max-sm:text-sm">
-                            @lang('shop::app.components.products.carousel.view-all')
-
-                            <span class="icon-arrow-right text-2xl max-md:text-lg max-sm:text-sm"></span>
-                        </p>
+                        @lang('shop::app.components.products.carousel.view-all')
+                        <span class="icon-arrow-right text-2xl transition-transform group-hover/viewall:translate-x-1"></span>
                     </a>
 
                     <template v-if="products.length > 3">

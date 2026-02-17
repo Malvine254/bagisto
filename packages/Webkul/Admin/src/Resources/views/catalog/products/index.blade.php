@@ -154,32 +154,65 @@
                                 @endif
 
                                 <div class="relative flex-shrink-0">
-                                    <template v-if="record.base_image">
-                                        <img
-                                            class="h-12 w-12 rounded object-cover sm:h-16 sm:w-16"
-                                            :src='record.base_image'
-                                        />
+                                    @if (bouncer()->hasPermission('catalog.products.edit'))
+                                        <a :href="`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`">
+                                            <template v-if="record.base_image">
+                                                <img
+                                                    class="h-12 w-12 rounded object-cover sm:h-16 sm:w-16 hover:opacity-80 transition-opacity"
+                                                    :src='record.base_image'
+                                                />
 
-                                        <span class="absolute -bottom-1 -right-1 rounded-full bg-darkPink px-1 text-xs font-bold leading-normal text-white">
-                                            @{{ record.images_count }}
-                                        </span>
-                                    </template>
+                                                <span class="absolute -bottom-1 -right-1 rounded-full bg-darkPink px-1 text-xs font-bold leading-normal text-white">
+                                                    @{{ record.images_count }}
+                                                </span>
+                                            </template>
 
-                                    <template v-else>
-                                        <div class="relative h-12 w-12 rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert sm:h-16 sm:w-16">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" class="h-full w-full object-cover">
+                                            <template v-else>
+                                                <div class="relative h-12 w-12 rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert sm:h-16 sm:w-16 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" class="h-full w-full object-cover">
 
-                                            <p class="absolute bottom-0 w-full text-center text-[6px] font-semibold text-gray-400">
-                                                @lang('admin::app.catalog.products.index.datagrid.product-image')
-                                            </p>
-                                        </div>
-                                    </template>
+                                                    <p class="absolute bottom-0 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                        @lang('admin::app.catalog.products.index.datagrid.product-image')
+                                                    </p>
+                                                </div>
+                                            </template>
+                                        </a>
+                                    @else
+                                        <template v-if="record.base_image">
+                                            <img
+                                                class="h-12 w-12 rounded object-cover sm:h-16 sm:w-16"
+                                                :src='record.base_image'
+                                            />
+
+                                            <span class="absolute -bottom-1 -right-1 rounded-full bg-darkPink px-1 text-xs font-bold leading-normal text-white">
+                                                @{{ record.images_count }}
+                                            </span>
+                                        </template>
+
+                                        <template v-else>
+                                            <div class="relative h-12 w-12 rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert sm:h-16 sm:w-16">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" class="h-full w-full object-cover">
+
+                                                <p class="absolute bottom-0 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                    @lang('admin::app.catalog.products.index.datagrid.product-image')
+                                                </p>
+                                            </div>
+                                        </template>
+                                    @endif
                                 </div>
 
                                 <div class="flex flex-col gap-1 flex-1">
-                                    <p class="break-all text-sm font-semibold text-gray-800 dark:text-white sm:text-base">
-                                        @{{ record.name }}
-                                    </p>
+                                    @if (bouncer()->hasPermission('catalog.products.edit'))
+                                        <a :href="`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`">
+                                            <p class="break-all text-sm font-semibold text-gray-800 dark:text-white sm:text-base hover:text-blue-600 transition-colors">
+                                                @{{ record.name }}
+                                            </p>
+                                        </a>
+                                    @else
+                                        <p class="break-all text-sm font-semibold text-gray-800 dark:text-white sm:text-base">
+                                            @{{ record.name }}
+                                        </p>
+                                    @endif
 
                                     <p class="text-xs text-gray-600 dark:text-gray-300 sm:text-sm">
                                         @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
@@ -273,9 +306,17 @@
                             @endif
 
                             <div class="flex flex-col gap-1.5">
-                                <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
-                                    @{{ record.name }}
-                                </p>
+                                @if (bouncer()->hasPermission('catalog.products.edit'))
+                                    <a :href="`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`">
+                                        <p class="break-all text-base font-semibold text-gray-800 dark:text-white hover:text-blue-600 transition-colors">
+                                            @{{ record.name }}
+                                        </p>
+                                    </a>
+                                @else
+                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
+                                        @{{ record.name }}
+                                    </p>
+                                @endif
 
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
@@ -290,26 +331,51 @@
                         <!-- Image, Price, Id, Stock Columns -->
                         <div class="flex gap-1.5">
                             <div class="relative">
-                                <template v-if="record.base_image">
-                                    <img
-                                        class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded"
-                                        :src='record.base_image'
-                                    />
+                                @if (bouncer()->hasPermission('catalog.products.edit'))
+                                    <a :href="`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`">
+                                        <template v-if="record.base_image">
+                                            <img
+                                                class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded hover:opacity-80 transition-opacity"
+                                                :src='record.base_image'
+                                            />
 
-                                    <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
-                                        @{{ record.images_count }}
-                                    </span>
-                                </template>
+                                            <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
+                                                @{{ record.images_count }}
+                                            </span>
+                                        </template>
 
-                                <template v-else>
-                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                        <template v-else>
+                                            <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
-                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
-                                            @lang('admin::app.catalog.products.index.datagrid.product-image')
-                                        </p>
-                                    </div>
-                                </template>
+                                                <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                    @lang('admin::app.catalog.products.index.datagrid.product-image')
+                                                </p>
+                                            </div>
+                                        </template>
+                                    </a>
+                                @else
+                                    <template v-if="record.base_image">
+                                        <img
+                                            class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded"
+                                            :src='record.base_image'
+                                        />
+
+                                        <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
+                                            @{{ record.images_count }}
+                                        </span>
+                                    </template>
+
+                                    <template v-else>
+                                        <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
+                                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                @lang('admin::app.catalog.products.index.datagrid.product-image')
+                                            </p>
+                                        </div>
+                                    </template>
+                                @endif
                             </div>
 
                             <div class="flex flex-col gap-1.5">
